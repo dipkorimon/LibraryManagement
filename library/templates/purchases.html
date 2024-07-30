@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Purchases{% endblock %}
+
+{% block content %}
+<h1>Purchases</h1>
+<table id="purchases_table" class="display">
+  <thead>
+    <tr>
+      <th>Purchase ID</th>
+      <th>Username</th>
+      <th>Book Title</th>
+      <th>Purchase Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for purchase_id, username, book_title, purchase_date in purchases %}
+    <tr>
+      <td>{{ purchase_id }}</td>
+      <td>{{ username }}</td>
+      <td>{{ book_title }}</td>
+      <td>{{ purchase_date }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+$(document).ready(function() {
+    $('#purchases_table').DataTable();
+});
+</script>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Stock Details{% endblock %}
+
+{% block content %}
+<h1>Stock Details</h1>
+<table id="stock_table" class="display">
+  <thead>
+    <tr>
+      <th>Book Title</th>
+      <th>Quantity</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for book_title, quantity in stock_details %}
+    <tr>
+      <td>{{ book_title }}</td>
+      <td>{{ quantity }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+$(document).ready(function() {
+    $('#stock_table').DataTable();
+});
+</script>
+{% endblock %}

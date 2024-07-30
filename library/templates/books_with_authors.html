@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Books with Authors{% endblock %}
+
+{% block content %}
+<h1>Books with Authors</h1>
+<table id="books_with_authors_table" class="display">
+  <thead>
+    <tr>
+      <th>Book Title</th>
+      <th>Author Name</th>
+      <th>Published Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for book, author, published_date in books_with_authors %}
+    <tr>
+      <td>{{ book }}</td>
+      <td>{{ author }}</td>
+      <td>{{ published_date }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+$(document).ready(function() {
+    $('#books_with_authors_table').DataTable();
+});
+</script>
+{% endblock %}

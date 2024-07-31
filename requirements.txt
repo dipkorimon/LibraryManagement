@@ -1,0 +1,9 @@
+asgiref==3.8.1
+Django==5.0.7
+greenlet==3.0.3
+mysqlclient==2.2.4
+pillow==10.4.0
+PyMySQL==1.1.1
+SQLAlchemy==2.0.31
+sqlparse==0.5.1
+typing_extensions==4.12.2

@@ -1,31 +1,36 @@
-{% extends 'base.html' %}
-
-{% block title %}Stock Details{% endblock %}
-
-{% block content %}
-<h1>Stock Details</h1>
-<table id="stock_table" class="display">
-  <thead>
-    <tr>
-      <th>Book Title</th>
-      <th>Quantity</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for book_title, quantity in stock_details %}
-    <tr>
-      <td>{{ book_title }}</td>
-      <td>{{ quantity }}</td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
-{% endblock %}
-
-{% block extra_scripts %}
-<script>
-$(document).ready(function() {
-    $('#stock_table').DataTable();
-});
-</script>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/themes/redmond/jquery-ui.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.15.5/css/ui.jqgrid.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.15.5/jquery.jqgrid.min.js"></script>
+  <script>
+    //<![CDATA[
+    $(function () {
+      "use strict";
+      $("#grid").jqGrid({
+        url: '/stock/',
+        datatype: 'json',
+        colModel: [
+          { label: "Book Title", name: "book_title" },
+          { label: "Quantity", name: "quantity" },
+        ],
+        viewrecords: true,
+        width: 780,
+        height: 200,
+        rowNum: 20,
+        pager: "#jqGridPager"
+      });
+    });
+    //]]>
+    </script>
+</head>
+<body>
+  <table id="grid"></table>
+  <div id="jqGridPager"></div>
+</body>
+</html>

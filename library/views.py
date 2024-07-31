@@ -3,6 +3,7 @@ from sqlalchemy.orm import sessionmaker
 from .models import Book, Author, Purchase, User, Stock
 from sqlalchemy import create_engine
 from datetime import datetime
+from django.http import JsonResponse
 
 DATABASE_URL = 'mysql+pymysql://dipkorimon:password@127.0.01/mydb'
 engine = create_engine(DATABASE_URL)
@@ -32,21 +33,15 @@ def add_book_view(request):
 
 def books_with_authors_view(request):
   books_with_authors = session.query(Book.title, Author.name, Book.published_date).join(Author, Book.author_id == Author.id).all()
-  context = {
-    'books_with_authors': books_with_authors
-  }
-  return render(request, 'books_with_authors.html', context)
+  books_with_authors_list = list(books_with_authors)
+  return JsonResponse(books_with_authors_list, safe=False)
 
 def purchases_view(request):
   purchases = session.query(Purchase.id, User.username, Book.title, Purchase.purchase_date).join(User, Purchase.user_id == User.id).join(Book, Purchase.book_id == Book.id).all()
-  context = {
-    'purchases': purchases
-  }
-  return render(request, 'purchases.html', context)
+  purchases_list = list(purchases)
+  return JsonResponse(purchases_list, safe=False)
 
 def stock_view(request):
   stock_details = session.query(Book.title, Stock.quantity).join(Stock, Book.id == Stock.book_id).all()
-  context = {
-    'stock_details': stock_details
-  }
-  return render(request, 'stock.html', context)
+  stock_details_list = list(stock_details)
+  return JsonResponse(stock_details_list, safe=False)
